@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
+    AppRegistry,
+    StyleSheet,
+    Text,
+	View,
+	VrButton,
 } from 'react-360';
 
-export default class Hello360 extends React.Component {
-  render() {
-    return (
-      <View style={styles.panel}>
-        <View style={styles.greetingBox}>
-          <Text style={styles.greeting}>
-            Welcome to React 360
-          </Text>
-        </View>
-      </View>
-    );
-  }
+export default class Hello360 extends Component {
+	// Our component will keep track of this state
+	state = {
+		count: 0,
+	};
+	
+	// This method increments our count, triggering a re-render
+	_incrementCount = () => {
+		this.setState({count: this.state.count + 1});
+	};
+	
+	// Once the component mounts, run the increment method every second
+	/* componentDidMount() {
+		setInterval(this._incrementCount, 1000);
+	} */
+
+
+	
+	render() {
+		// Reference the count in our UI
+		return (
+			<View style={styles.panel}>
+				<VrButton
+					onClick={this._incrementCount}
+					style={styles.greetingBox}>
+					<Text style={styles.greeting}>
+					{`Count: ${this.state.count}`}
+					</Text>
+				</VrButton>
+			</View>
+		);
+	}
 };
 
 const styles = StyleSheet.create({
